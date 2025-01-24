@@ -9,6 +9,7 @@ shared_scripts {
   "cfg/cfg.lua",
   "@ox_lib/init.lua"
 }
+
 server_script {
   "server/server.lua",
   "@oxmysql/lib/MySQL.lua"
