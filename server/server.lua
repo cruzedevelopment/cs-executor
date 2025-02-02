@@ -18,13 +18,16 @@ end)
 
 local function hasAdminRole(player)
     if Framework.Name == "qbcore" then
-        local Player = Framework.Functions.Functions.GetPlayer(player)
+        local Player = Framework.Functions.GetPlayer(player)
         if not Player then return false end
 
-        local groups = Player.PlayerData.groups
-        for _, role in pairs(Config.AllowedRoles) do
-            if groups and groups[role] then
-                return true
+        local groups = Player.PlayerData.groups or {}
+
+        for _, allowedRole in ipairs(Config.AllowedRoles) do
+            for _, group in ipairs(groups) do
+                if group == allowedRole then
+                    return true
+                end
             end
         end
 
@@ -43,7 +46,7 @@ local function hasAdminRole(player)
         local Player = exports.ox_core:GetPlayer(player)
         if not Player then return false end
 
-        local groups = Player.getGroups()
+        local groups = Player.getGroups() or {}
         for _, role in pairs(Config.AllowedRoles) do
             if groups and groups[role] then
                 return true
